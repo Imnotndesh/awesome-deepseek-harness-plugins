@@ -1,0 +1,65 @@
+/* Hallmark · pre-emit critique: P5 H4 E5 S4 R5 V5
+ * Hallmark · genre: modern-minimal · macrostructure: Ecosystem Index · theme: Cobalt
+ * tone: technical/utilitarian (catalog-first) · anchor hue: 256 (electric cobalt)
+ * nav: N13 inline ⌘K pill (knobs: placement=right-of-brand, groups=grouped, hints=shown)
+ * footer: Ft2 inline rule single line · enrichment: none (typography + code card only)
+ */
+
+:root {
+  /* Colour — cool engineered paper, one cobalt signal */
+  --color-paper: oklch(98.5% 0.004 250);
+  --color-paper-2: oklch(96.2% 0.006 250);
+  --color-rule: oklch(90% 0.007 250);
+  --color-rule-2: oklch(80% 0.009 252);
+  --color-ink: oklch(24% 0.02 258);
+  --color-ink-2: oklch(34% 0.018 257);
+  --color-muted: oklch(48% 0.014 255);
+  --color-accent: oklch(58% 0.2 256);
+  --color-accent-ink: oklch(98.5% 0.004 256);
+  --color-focus: oklch(58% 0.2 256);
+  --color-graphite: oklch(22% 0.016 260);
+  --color-graphite-2: oklch(27% 0.016 260);
+  --color-graphite-rule: oklch(34% 0.014 260);
+  --color-graphite-ink: oklch(92% 0.008 258);
+  --color-graphite-muted: oklch(68% 0.012 258);
+
+  /* Type — Space Grotesk display · Inter body · JetBrains Mono outlier (code + meta) */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Scale — major third (1.25) from 16px */
+  --text-xs: 0.64rem;
+  --text-sm: 0.8rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.5625rem;
+  --text-xl: 1.9531rem;
+  --text-2xl: 2.4414rem;
+  --text-display: clamp(2rem, 3.5vw + 0.75rem, 3.0518rem);
+
+  /* Space — 4pt scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  /* Structure */
+  --radius: 6px;
+  --radius-card: 10px;
+  --rule: 1px solid var(--color-rule);
+  --shadow-cmdk: 0 16px 48px -16px oklch(24% 0.02 258 / 0.25);
+  --z-nav: 100;
+  --z-cmdk: 700;
+}

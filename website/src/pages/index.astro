@@ -1,0 +1,503 @@
+---
+import '../styles/tokens.css';
+import { PLUGINS, CATEGORY_ORDER } from '../data/plugins';
+
+const fmt = (n: number | null) => (n === null ? null : n.toLocaleString('en-US'));
+const cats = CATEGORY_ORDER
+  .map((c) => ({ name: c, items: PLUGINS.filter((p) => p.cat === c) }))
+  .filter((c) => c.items.length > 0);
+const total = PLUGINS.length;
+const totalStars = PLUGINS.reduce((s, p) => s + (p.stars ?? 0), 0);
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const cmdkData = PLUGINS.map((p) => ({ name: p.name, url: p.url, desc: p.desc, cat: p.cat, chip: p.chip, stars: p.stars }));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Awesome DeepSeek Harness Plugins — the dsh plugin catalog</title>
+    <meta name="description" content={`${total} plugins, tools and integrations for DeepSeek Harness (dsh), discovered via the dsh-plugin GitHub topic. Search, filter by category, jump to the repo.`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#catalog">Skip to catalog</a>
+
+    <!-- N13 · inline ⌘K search pill nav -->
+    <header class="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href={import.meta.env.BASE_URL}>awesome-dsh-plugins</a>
+        <button class="searchpill" id="searchpill" aria-label="Search plugins (⌘K)" aria-haspopup="dialog">
+          <svg class="searchpill__ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <span class="searchpill__text">Search plugins…</span>
+          <span class="searchpill__kbd"><kbd>⌘</kbd><kbd>K</kbd></span>
+        </button>
+        <nav class="nav__right" aria-label="Primary">
+          <a class="nav__link" href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener">Topic</a>
+          <a class="nav__link" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">Harness</a>
+          <a class="btn btn--primary" href="https://github.com/SihanTeng/awesome-deepseek-harness-plugins#contributing" target="_blank" rel="noopener">Add a plugin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero — brief positioning, no display theatrics (Ecosystem Index) -->
+      <section class="hero reveal" style="--i: 0">
+        <div class="wrap">
+          <h1 class="hero__title">Every DeepSeek Harness plugin, one catalog.</h1>
+          <p class="hero__lede">
+            DeepSeek Harness (<code>dsh</code>) is the open-source agent runtime where everything is a plugin.
+            This catalog tracks the community ecosystem — search it, filter by category, jump straight to the repo.
+          </p>
+          <p class="hero__meta">
+            <span>{total} plugins</span><i aria-hidden="true"></i><span>{cats.length} categories</span><i aria-hidden="true"></i><span>{totalStars.toLocaleString('en-US')} ★ combined</span><i aria-hidden="true"></i><span>data as of Aug 2026</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- The one dark graphite band — quickstart -->
+      <section class="quick reveal" style="--i: 1" aria-labelledby="quick-title">
+        <div class="wrap quick__grid">
+          <div class="quick__intro">
+            <h2 id="quick-title">Start here.</h2>
+            <p>Run the harness, then install any plugin from the catalog into your <code>web</code> profile.</p>
+          </div>
+          <div class="quick__cmds">
+            <div class="cmd">
+              <p class="cmd__label">Run the harness</p>
+              <div class="cmd__row">
+                <code class="cmd__code">npx @deepseek-ai/dsh web</code>
+                <button class="cmd__copy" data-copy="npx @deepseek-ai/dsh web">Copy</button>
+              </div>
+            </div>
+            <div class="cmd">
+              <p class="cmd__label">Install a plugin</p>
+              <div class="cmd__row">
+                <code class="cmd__code">dsh plugin --profile web add "github:owner/repo"</code>
+                <button class="cmd__copy" data-copy='dsh plugin --profile web add "github:owner/repo"'>Copy</button>
+              </div>
+            </div>
+            <p class="quick__note">Shipping your own? Add the <a href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener">dsh-plugin</a> topic to your repo and it becomes discoverable.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Catalog -->
+      <section class="catalog" id="catalog" aria-label="Plugin catalog">
+        <div class="wrap">
+          <div class="filterbar reveal" style="--i: 2">
+            <div class="filterbar__search">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+              <input id="filter-input" type="search" placeholder="Filter by name or description…" aria-label="Filter plugins by name or description" autocomplete="off" />
+            </div>
+            <div class="filterbar__chips" role="group" aria-label="Filter by category">
+              <button class="chip is-active" data-chip="all">All <span class="chip__n">{total}</span></button>
+              {cats.map((c) => (
+                <button class="chip" data-chip={c.name}>{c.items[0].chip} <span class="chip__n">{c.items.length}</span></button>
+              ))}
+            </div>
+            <p class="filterbar__count" id="result-count" aria-live="polite">{total} of {total} plugins</p>
+          </div>
+
+          <div id="sections">
+            {cats.map((c) => (
+              <section class="cat" data-section={c.name} id={slug(c.name)} aria-labelledby={`h-${slug(c.name)}`}>
+                <header class="cat__head">
+                  <h2 id={`h-${slug(c.name)}`}>{c.name}</h2>
+                  <span class="cat__count">{c.items.length}</span>
+                </header>
+                <div class="grid">
+                  {c.items.map((p) => (
+                    <a
+                      class="card"
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener"
+                      data-cat={p.cat}
+                      data-q={`${p.name} ${p.desc} ${p.sub ?? ''} ${p.cat}`.toLowerCase()}
+                    >
+                      <span class="card__top">
+                        <span class="card__name">{p.name}</span>
+                        {p.stars !== null && <span class="card__stars">★ {fmt(p.stars)}</span>}
+                      </span>
+                      <span class="card__desc">{p.desc}</span>
+                      <span class="card__meta">
+                        <span class="card__sub">{p.sub ?? p.chip}</span>
+                        <span class="card__repo">{p.url.replace('https://github.com/', '')}</span>
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <div class="empty" id="empty" hidden>
+            <p class="empty__title">No plugins match <span id="empty-q"></span>.</p>
+            <button class="btn btn--ghost" id="empty-clear">Clear search</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Ft2 · inline rule single line -->
+    <footer class="foot">
+      <div class="wrap">
+        <p>© 2026 · <a href="https://github.com/SihanTeng/awesome-deepseek-harness-plugins" target="_blank" rel="noopener">awesome-deepseek-harness-plugins</a> · CC0 · star counts via GitHub API, Aug 2026</p>
+      </div>
+    </footer>
+
+    <!-- ⌘K command palette -->
+    <div class="cmdk" id="cmdk" aria-hidden="true">
+      <div class="cmdk__backdrop" data-close></div>
+      <div class="cmdk__panel" role="dialog" aria-modal="true" aria-label="Search plugins">
+        <div class="cmdk__field">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <input id="cmdk-input" type="text" placeholder="Search plugins…" aria-label="Search plugins" autocomplete="off" />
+          <kbd>esc</kbd>
+        </div>
+        <div class="cmdk__results" id="cmdk-results" role="listbox" aria-label="Results"></div>
+        <div class="cmdk__foot">
+          <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+          <span><kbd>↵</kbd> open repo</span>
+          <span><kbd>esc</kbd> close</span>
+        </div>
+      </div>
+    </div>
+
+    <script type="application/json" id="plugin-data" set:html={JSON.stringify(cmdkData)} />
+
+    <style is:global>
+      html, body { overflow-x: clip; }
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--color-paper);
+        color: var(--color-ink-2);
+        font-family: var(--font-body);
+        font-weight: 400;
+        font-size: var(--text-base);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 72rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+      h1, h2, h3 { font-family: var(--font-display); font-style: normal; color: var(--color-ink); letter-spacing: -0.02em; overflow-wrap: anywhere; min-width: 0; }
+      a { color: inherit; }
+      code { font-family: var(--font-mono); font-size: 0.875em; }
+      :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+      .skip { position: absolute; left: -9999px; top: 0; background: var(--color-ink); color: var(--color-paper); padding: var(--space-sm) var(--space-md); z-index: var(--z-cmdk); }
+      .skip:focus { left: 0; }
+
+      /* Reveal — one orchestrated entrance, capped stagger */
+      .reveal { opacity: 0; transform: translateY(10px); animation: rise var(--dur-long) var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms); }
+      @keyframes rise { to { opacity: 1; transform: none; } }
+
+      /* ── Nav (N13) ── */
+      .nav { position: sticky; top: 0; z-index: var(--z-nav); background: color-mix(in oklch, var(--color-paper) 88%, transparent); backdrop-filter: blur(8px); border-bottom: var(--rule); }
+      .nav__inner { max-width: 72rem; margin-inline: auto; padding: var(--space-sm) clamp(1rem, 4vw, 2rem); display: flex; align-items: center; gap: var(--space-md); }
+      .nav__brand { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-sm); color: var(--color-ink); text-decoration: none; white-space: nowrap; }
+      .searchpill { display: flex; align-items: center; gap: 0.6rem; height: 40px; padding: 0 0.55rem 0 0.85rem; margin-inline: auto; background: var(--color-paper-2); border: var(--rule); border-radius: var(--radius); color: var(--color-muted); font: 400 var(--text-sm) var(--font-body); cursor: pointer; transition: border-color var(--dur-short) var(--ease-out); }
+      .searchpill:hover { border-color: var(--color-rule-2); }
+      .searchpill__text { white-space: nowrap; }
+      .searchpill__kbd { display: flex; gap: 2px; }
+      kbd { font: 500 var(--text-xs) var(--font-mono); color: var(--color-muted); background: var(--color-paper); border: var(--rule); border-radius: 4px; padding: 1px 5px; }
+      .nav__right { display: flex; align-items: center; gap: var(--space-md); margin-left: auto; }
+      .nav__link { font-size: var(--text-sm); color: var(--color-ink-2); text-decoration: none; white-space: nowrap; background-image: linear-gradient(var(--color-accent), var(--color-accent)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px; transition: background-size var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+      .nav__link:hover { color: var(--color-accent); background-size: 100% 1px; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 var(--space-md); border-radius: var(--radius); font: 500 var(--text-sm) var(--font-body); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+      .btn--primary { background: var(--color-accent); color: var(--color-accent-ink); border: 1px solid var(--color-accent); }
+      .btn--primary:hover { background: color-mix(in oklch, var(--color-accent) 88%, var(--color-ink)); }
+      .btn--primary:active { transform: translateY(1px); }
+      .btn--ghost { background: transparent; color: var(--color-accent); border: 1px solid var(--color-rule-2); }
+
+      /* ── Hero ── */
+      .hero { padding-block: var(--space-3xl) var(--space-2xl); }
+      .hero__title { font-size: var(--text-display); font-weight: 600; line-height: 1.12; margin: 0 0 var(--space-md); max-width: 22ch; }
+      .hero__lede { max-width: 62ch; margin: 0 0 var(--space-lg); font-size: var(--text-md); line-height: 1.55; }
+      .hero__lede code { background: var(--color-paper-2); border: var(--rule); border-radius: 4px; padding: 1px 5px; }
+      .hero__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-md); margin: 0; font: 500 var(--text-xs) var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-muted); }
+      .hero__meta i { width: 4px; height: 4px; background: var(--color-rule-2); border-radius: 50%; }
+
+      /* ── Quickstart — the one dark graphite band ── */
+      .quick { background: var(--color-graphite); color: var(--color-graphite-muted); padding-block: var(--space-2xl); }
+      .quick__grid { display: grid; gap: var(--space-xl); }
+      @media (min-width: 60rem) { .quick__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; } }
+      .quick h2 { color: var(--color-graphite-ink); font-size: var(--text-xl); font-weight: 600; margin: 0 0 var(--space-sm); }
+      .quick__intro p { margin: 0; max-width: 40ch; }
+      .quick__intro code, .quick__note code { color: var(--color-graphite-ink); }
+      .cmd { margin-bottom: var(--space-md); }
+      .cmd__label { margin: 0 0 var(--space-xs); font: 500 var(--text-xs) var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-graphite-muted); }
+      .cmd__row { display: flex; align-items: stretch; gap: var(--space-sm); background: var(--color-graphite-2); border: 1px solid var(--color-graphite-rule); border-radius: var(--radius-card); padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md); }
+      .cmd__code { flex: 1; align-self: center; font-size: var(--text-sm); color: var(--color-graphite-ink); overflow-x: auto; white-space: nowrap; scrollbar-width: thin; }
+      .cmd__copy { flex-shrink: 0; min-height: 32px; padding: 0 var(--space-sm); background: transparent; border: 1px solid var(--color-graphite-rule); border-radius: var(--radius); color: var(--color-graphite-ink); font: 500 var(--text-xs) var(--font-mono); cursor: pointer; white-space: nowrap; transition: border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+      .cmd__copy:hover { border-color: var(--color-accent); color: var(--color-accent); }
+      .cmd__copy[data-state="copied"] { color: var(--color-accent); border-color: var(--color-accent); }
+      .quick__note { margin: var(--space-md) 0 0; font-size: var(--text-sm); }
+      .quick__note a { color: var(--color-accent); text-decoration: none; white-space: nowrap; }
+      .quick__note a:hover { text-decoration: underline; }
+
+      /* ── Filter bar ── */
+      .catalog { padding-block: var(--space-2xl) var(--space-3xl); }
+      .filterbar { position: sticky; top: 57px; z-index: calc(var(--z-nav) - 1); background: var(--color-paper); padding-block: var(--space-md); border-bottom: var(--rule); margin-bottom: var(--space-xl); }
+      .filterbar__search { display: flex; align-items: center; gap: var(--space-sm); height: 44px; padding: 0 var(--space-md); background: var(--color-paper-2); border: var(--rule); border-radius: var(--radius); color: var(--color-muted); transition: border-color var(--dur-short) var(--ease-out); }
+      .filterbar__search:focus-within { border-color: var(--color-accent); }
+      .filterbar__search input { flex: 1; min-width: 0; border: 0; background: transparent; font: 400 var(--text-base) var(--font-body); color: var(--color-ink); outline: none; }
+      .filterbar__search input::placeholder { color: var(--color-muted); }
+      .filterbar__chips { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-sm); }
+      .chip { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 36px; padding: 0 var(--space-sm); background: var(--color-paper); border: var(--rule); border-radius: var(--radius); color: var(--color-ink-2); font: 500 var(--text-sm) var(--font-body); white-space: nowrap; cursor: pointer; transition: border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+      .chip:hover { border-color: var(--color-rule-2); }
+      .chip.is-active { border-color: var(--color-accent); color: var(--color-accent); }
+      .chip__n { font: 500 var(--text-xs) var(--font-mono); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+      .chip.is-active .chip__n { color: var(--color-accent); }
+      .filterbar__count { margin: var(--space-sm) 0 0; font: 500 var(--text-xs) var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+
+      /* ── Category sections (rail-titled bands) ── */
+      .cat { margin-bottom: var(--space-2xl); scroll-margin-top: 150px; }
+      .cat[hidden] { display: none; }
+      .cat__head { display: flex; align-items: baseline; gap: var(--space-sm); border-bottom: var(--rule); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg); }
+      .cat__head h2 { font-size: var(--text-lg); font-weight: 600; margin: 0; }
+      .cat__count { font: 500 var(--text-xs) var(--font-mono); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+      .grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); }
+
+      /* ── Plugin card ── */
+      .card { display: flex; flex-direction: column; gap: var(--space-sm); padding: var(--space-md) var(--space-lg); background: var(--color-paper); border: var(--rule); border-radius: var(--radius-card); text-decoration: none; transition: border-color var(--dur-short) var(--ease-out); }
+      .card:hover { border-color: var(--color-accent); }
+      .card[hidden] { display: none; }
+      .card__top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md); }
+      .card__name { font: 600 var(--text-base) var(--font-display); color: var(--color-ink); letter-spacing: -0.01em; overflow-wrap: anywhere; min-width: 0; }
+      .card__stars { flex-shrink: 0; font: 500 var(--text-xs) var(--font-mono); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+      .card:hover .card__stars { color: var(--color-accent); }
+      .card__desc { font-size: var(--text-sm); line-height: 1.55; color: var(--color-ink-2); flex: 1; }
+      .card__meta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); font: 500 var(--text-xs) var(--font-mono); color: var(--color-muted); }
+      .card__sub { letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+      .card__repo { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+      /* ── Empty state ── */
+      .empty { text-align: center; padding-block: var(--space-3xl); }
+      .empty__title { font: 500 var(--text-md) var(--font-display); color: var(--color-ink); margin: 0 0 var(--space-lg); overflow-wrap: anywhere; }
+      .empty__title span { color: var(--color-accent); }
+
+      /* ── Footer (Ft2) ── */
+      .foot { border-top: var(--rule); padding-block: var(--space-lg); }
+      .foot p { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+      .foot a { color: var(--color-ink-2); text-decoration: none; white-space: nowrap; }
+      .foot a:hover { color: var(--color-accent); text-decoration: underline; }
+
+      /* ── ⌘K palette ── */
+      .cmdk { position: fixed; inset: 0; z-index: var(--z-cmdk); opacity: 0; visibility: hidden; transition: opacity var(--dur-short) var(--ease-out), visibility var(--dur-short) var(--ease-out); }
+      .cmdk.is-open { opacity: 1; visibility: visible; }
+      .cmdk__backdrop { position: absolute; inset: 0; background: color-mix(in oklch, var(--color-graphite) 45%, transparent); }
+      .cmdk__panel { position: absolute; top: 12vh; left: 50%; transform: translateX(-50%) translateY(-8px); width: min(36rem, calc(100% - 2rem)); background: var(--color-paper); border: var(--rule); border-radius: var(--radius-card); box-shadow: var(--shadow-cmdk); overflow: hidden; transition: transform var(--dur-short) var(--ease-out); }
+      .cmdk.is-open .cmdk__panel { transform: translateX(-50%) translateY(0); }
+      .cmdk__field { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-md); border-bottom: var(--rule); color: var(--color-muted); }
+      .cmdk__field input { flex: 1; min-width: 0; border: 0; background: transparent; font: 400 var(--text-base) var(--font-body); color: var(--color-ink); outline: none; }
+      .cmdk__results { max-height: 22rem; overflow-y: auto; padding: var(--space-xs); }
+      .cmdk__group { margin: var(--space-sm) var(--space-sm) var(--space-xs); font: 500 var(--text-xs) var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-muted); }
+      .cmdk__item { display: flex; flex-direction: column; gap: 2px; width: 100%; padding: var(--space-sm) var(--space-md); background: transparent; border: 0; border-radius: var(--radius); text-align: left; cursor: pointer; font: 400 var(--text-sm) var(--font-body); color: var(--color-ink-2); }
+      .cmdk__item__name { display: flex; justify-content: space-between; gap: var(--space-md); font: 600 var(--text-sm) var(--font-display); color: var(--color-ink); }
+      .cmdk__item__stars { font: 500 var(--text-xs) var(--font-mono); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+      .cmdk__item__desc { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-muted); }
+      .cmdk__item.is-active { background: var(--color-paper-2); }
+      .cmdk__item.is-active .cmdk__item__name { color: var(--color-accent); }
+      .cmdk__none { padding: var(--space-lg) var(--space-md); font-size: var(--text-sm); color: var(--color-muted); text-align: center; }
+      .cmdk__foot { display: flex; gap: var(--space-lg); padding: var(--space-sm) var(--space-md); border-top: var(--rule); font: 500 var(--text-xs) var(--font-mono); color: var(--color-muted); }
+      .cmdk__foot kbd { margin-right: 2px; }
+
+      /* ── Responsive ── */
+      @media (max-width: 40rem) {
+        .searchpill__text, .searchpill__kbd { display: none; }
+        .searchpill { width: 40px; padding: 0; justify-content: center; margin-inline: 0; }
+        .nav__link { display: none; }
+        .hero { padding-block: var(--space-2xl) var(--space-xl); }
+        .filterbar { top: 56px; }
+        .cmdk__panel { top: 0; width: 100%; height: 100dvh; border-radius: 0; border: 0; }
+        .cmdk__results { max-height: none; }
+        .cmdk__foot { display: none; }
+      }
+      @media (pointer: coarse) {
+        .chip { min-height: 44px; }
+        .cmd__copy { min-height: 44px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 150ms !important; animation-iteration-count: 1 !important; transition-duration: 150ms !important; }
+        .reveal { opacity: 1; transform: none; animation: none; }
+        .cmdk, .cmdk__panel { transition: opacity 150ms linear, visibility 150ms linear; transform: translateX(-50%); }
+      }
+    </style>
+
+    <script>
+      const DATA = JSON.parse(document.getElementById('plugin-data').textContent);
+
+      /* ── Catalog filter (search + category chips) ── */
+      const input = document.getElementById('filter-input');
+      const chips = [...document.querySelectorAll('.chip')];
+      const cards = [...document.querySelectorAll('.card')];
+      const sections = [...document.querySelectorAll('[data-section]')];
+      const countEl = document.getElementById('result-count');
+      const emptyEl = document.getElementById('empty');
+      const emptyQ = document.getElementById('empty-q');
+      let activeCat = 'all';
+      let query = '';
+      let debounce;
+
+      function applyFilter() {
+        let shown = 0;
+        for (const card of cards) {
+          const okCat = activeCat === 'all' || card.dataset.cat === activeCat;
+          const okQ = !query || card.dataset.q.includes(query);
+          const show = okCat && okQ;
+          card.hidden = !show;
+          if (show) shown++;
+        }
+        for (const sec of sections) {
+          const visible = [...sec.querySelectorAll('.card')].some((c) => !c.hidden);
+          sec.hidden = !visible;
+        }
+        countEl.textContent = `${shown} of ${cards.length} plugins`;
+        const isEmpty = shown === 0;
+        emptyEl.hidden = !isEmpty;
+        if (isEmpty) emptyQ.textContent = query ? `“${query}”` : 'this category';
+      }
+
+      input.addEventListener('input', () => {
+        clearTimeout(debounce);
+        debounce = setTimeout(() => {
+          query = input.value.trim().toLowerCase();
+          applyFilter();
+        }, 250);
+      });
+
+      for (const chip of chips) {
+        chip.addEventListener('click', () => {
+          activeCat = chip.dataset.chip;
+          for (const c of chips) c.classList.toggle('is-active', c === chip);
+          applyFilter();
+        });
+      }
+
+      document.getElementById('empty-clear').addEventListener('click', () => {
+        input.value = '';
+        query = '';
+        activeCat = 'all';
+        for (const c of chips) c.classList.toggle('is-active', c.dataset.chip === 'all');
+        applyFilter();
+        input.focus();
+      });
+
+      /* ── Copy buttons (label swap, no toast) ── */
+      for (const btn of document.querySelectorAll('.cmd__copy')) {
+        btn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(btn.dataset.copy);
+          } catch {
+            const ta = document.createElement('textarea');
+            ta.value = btn.dataset.copy;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+          }
+          btn.dataset.state = 'copied';
+          btn.textContent = '✓ Copied';
+          setTimeout(() => {
+            delete btn.dataset.state;
+            btn.textContent = 'Copy';
+          }, 2500);
+        });
+      }
+
+      /* ── ⌘K command palette ── */
+      const cmdk = document.getElementById('cmdk');
+      const cmdkInput = document.getElementById('cmdk-input');
+      const cmdkResults = document.getElementById('cmdk-results');
+      const pill = document.getElementById('searchpill');
+      let cmdkItems = [];
+      let activeIdx = 0;
+      let lastFocus = null;
+
+      function openCmdk() {
+        lastFocus = document.activeElement;
+        cmdk.classList.add('is-open');
+        cmdk.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        cmdkInput.value = '';
+        renderCmdk('');
+        cmdkInput.focus();
+      }
+      function closeCmdk() {
+        cmdk.classList.remove('is-open');
+        cmdk.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+      const isOpen = () => cmdk.classList.contains('is-open');
+
+      function renderCmdk(q) {
+        const query = q.trim().toLowerCase();
+        const hits = DATA.filter((p) => !query || `${p.name} ${p.desc} ${p.cat}`.toLowerCase().includes(query)).slice(0, 24);
+        cmdkResults.innerHTML = '';
+        cmdkItems = [];
+        activeIdx = 0;
+        if (hits.length === 0) {
+          const none = document.createElement('p');
+          none.className = 'cmdk__none';
+          none.textContent = `No plugins match “${q}”.`;
+          cmdkResults.appendChild(none);
+          return;
+        }
+        let lastCat = null;
+        for (const p of hits) {
+          if (p.cat !== lastCat) {
+            lastCat = p.cat;
+            const g = document.createElement('p');
+            g.className = 'cmdk__group';
+            g.textContent = p.cat;
+            cmdkResults.appendChild(g);
+          }
+          const b = document.createElement('button');
+          b.className = 'cmdk__item';
+          b.setAttribute('role', 'option');
+          b.innerHTML = `<span class="cmdk__item__name"><span></span>${p.stars !== null ? `<span class="cmdk__item__stars">★ ${p.stars.toLocaleString('en-US')}</span>` : ''}</span><span class="cmdk__item__desc"></span>`;
+          b.querySelector('.cmdk__item__name span').textContent = p.name;
+          b.querySelector('.cmdk__item__desc').textContent = p.desc;
+          b.addEventListener('click', () => window.open(p.url, '_blank', 'noopener'));
+          b.addEventListener('mousemove', () => setActive(cmdkItems.indexOf(b)));
+          cmdkResults.appendChild(b);
+          cmdkItems.push(b);
+        }
+        setActive(0);
+      }
+
+      function setActive(i) {
+        if (!cmdkItems.length) return;
+        activeIdx = Math.max(0, Math.min(i, cmdkItems.length - 1));
+        cmdkItems.forEach((el, j) => el.classList.toggle('is-active', j === activeIdx));
+        cmdkItems[activeIdx].scrollIntoView({ block: 'nearest' });
+      }
+
+      pill.addEventListener('click', openCmdk);
+      cmdk.querySelector('[data-close]').addEventListener('click', closeCmdk);
+      cmdkInput.addEventListener('input', () => renderCmdk(cmdkInput.value));
+
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          isOpen() ? closeCmdk() : openCmdk();
+          return;
+        }
+        if (!isOpen()) return;
+        if (e.key === 'Escape') { e.preventDefault(); closeCmdk(); }
+        else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+        else if (e.key === 'Enter' && cmdkItems[activeIdx]) {
+          e.preventDefault();
+          cmdkItems[activeIdx].click();
+        }
+      });
+    </script>
+  </body>
+</html>
