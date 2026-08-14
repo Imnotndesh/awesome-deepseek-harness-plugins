@@ -1,0 +1,124 @@
+# Awesome DeepSeek Harness Plugins
+
+> A curated catalog of plugins, tools and integrations for DeepSeek Harness (dsh), the open-source agent runtime by DeepSeek AI where everything is a plugin. Discover plugins via the dsh-plugin GitHub topic; install them into a dsh web profile.
+
+The full interactive catalog with search and category filters lives at https://awesome-deepseek-harness-plugins.pages.dev/ — the source list is maintained at https://github.com/SihanTeng/awesome-deepseek-harness-plugins
+
+## Usage
+
+- Run the harness: `npx @deepseek-ai/dsh web`
+- Install a plugin: `dsh plugin --profile web add "github:owner/repo"`
+- Publish a plugin: add the `dsh-plugin` topic to your GitHub repository
+
+## Official
+
+- [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) (★ 78,877): The official DeepSeek Harness runtime. Run it with `npx @deepseek-ai/dsh web`.
+
+## Tool Plugins
+
+- [modlens](https://github.com/liustack/modlens) (★ 985): The first vision plugin for DeepSeek Harness — paste an image, get analysis; a vision bridge for text-only coding agents.
+- [rea](https://github.com/morluto/rea) (★ 295): Reverse engineer anything with agents, from app behavior down to native binaries.
+- [dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) (★ 265): Vision toolkit for text-only models: intent-aware image Q&A, long-screenshot OCR, and UI restoration.
+- [mcp-for-stata](https://github.com/SepineTam/mcp-for-stata) (★ 243): MCP server integrating Stata into your agent workflow.
+- [open-record-replay](https://github.com/humblebanana/open-record-replay) (★ 135): macOS record-and-replay workflow recorder for computer-use agents: captures mouse, keyboard, and UI events.
+- [dsh-at-file](https://github.com/omdsh-dev/dsh-at-file) (★ 86): Codex-style `@file` mentions: search workspace files in the composer and attach them to prompts.
+- [modsearch](https://github.com/liustack/modsearch) (★ 76): Web plugin for DeepSeek Harness: ask the web or X, get structured results.
+- [dsh-browser](https://github.com/Lum1104/dsh-browser) (★ 64): Chrome sidebar extension that lets DSH operate your browser directly — no vision capabilities required.
+- [argo](https://github.com/taxueseek/argo) (★ 63): Multilingual search built for agents, covering CN/EN, academic, code, shopping, finance, and news.
+- [jacobian](https://github.com/morluto/jacobian) (★ 40): Pure mathematics for agents: search examples/counterexamples, compute exactly, independently check reasoning.
+- [flameox](https://github.com/morluto/flameox) (★ 31): Runtime evidence for agents: trace, profile, and burn down hotspots in application, native, and GPU code.
+- [browser-bridge](https://github.com/hanelalo/browser-bridge) (★ 28): Let your agent drive your real browser window, just like you would.
+- [dsh-custom-tool](https://github.com/omdsh-dev/dsh-custom-tool) (★ 20): Create and manage sandboxed JavaScript tools with a Monaco editor and model-driven tool lifecycle.
+- [leantoken](https://github.com/morluto/leantoken) (★ 16): Code intelligence for agents: find the code that matters and keep your context window lean.
+- [dsh-vision](https://github.com/william-jin-cmu/dsh-vision) (★ 15): `view_image` tool bridging any OpenAI-compatible VLM (works with free tiers).
+- [dsh-computer-use](https://github.com/Anionex/dsh-computer-use) (★ 15): Accessibility-first macOS computer-use plugin with scoped permissions and safe input.
+- [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) (★ 14): Built-in keyless vision chain plus pixel-level tools (Q&A, grounding) for text-only agents.
+- [dsh-toolkit](https://github.com/omdsh-dev/dsh-toolkit) (★ 14): Zero-dependency toolkit: time, encoding, JSON, calculator, CSV, regex, Markdown, diff, stat, and schema tools.
+- [dsh-plugin (PicGo)](https://github.com/PicGo/dsh-plugin): Upload images and files to your image host from DeepSeek Harness, powered by PicGo.
+
+## Memory & Context
+
+- [mnemon](https://github.com/mnemon-dev/mnemon) (★ 426): LLM-supervised persistent memory for AI agents: graph-based recall, cross-session knowledge, single binary.
+- [dsh-memory-evolve](https://github.com/csyangwen/dsh-memory-evolve) (★ 30): Cross-session long-term memory plus background self-evolution: five-track memory, git-branch awareness, and skill evolution — pure plugin, no core changes.
+- [billion-context-dsh](https://github.com/Tyan66666/billion-context-dsh): Model-driven context compression (Active Context Pruning) — the model decides when and what to compress.
+- [dsh-context-doctor](https://github.com/Zhenyu98/dsh-context-doctor): Audit exactly what every request carries: token cost of the AGENTS.md chain, skill catalog, and tool schemas, with duplicate/conflict detection.
+
+## Orchestration & Agents
+
+- [Vibe-Skills](https://github.com/foryourhealth111-pixel/Vibe-Skills) (★ 2,709): General-purpose skill that automatically routes local skills and orchestrates harness workflows.
+- [helloagents](https://github.com/hellowind777/helloagents) (★ 670): An autonomous agent companion that keeps working until the implementation is done and verified.
+- [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) (★ 181): AgentTeams plugin for DeepSeek Harness.
+- [dsh_workflow](https://github.com/icetomoyo/dsh_workflow) (★ 49): Brings Claude Code's UltraCode mode to DSH: one-off multi-agent scheduling upgraded into a generatable, saveable, governable, observable, resumable workflow layer.
+- [mstar-harness](https://github.com/btspoony/mstar-harness) (★ 41): Skill-driven harness/loop-engineering workflow agent plugin.
+- [oh-my-dsh](https://github.com/LaplaceYoung/oh-my-dsh) (★ 38): A 700+ plugin ecosystem for DSH, registered purely through extension seams without touching the agent loop.
+- [allinluna](https://github.com/zenx0x/allinluna) (★ 24): Resource-aware multi-agent orchestration for Codex and DeepSeek Harness.
+- [dsh-automation](https://github.com/titanwings/dsh-automation) (★ 24): Run coding tasks on a schedule in fresh agent sessions, with user- or agent-managed cron tasks.
+- [dsh-interconnect](https://github.com/Chinesezjc/dsh-interconnect) (★ 21): Cross-instance message and event handoff between DSH instances.
+- [deepseek-harness-action](https://github.com/Lixiaoyiao/deepseek-harness-action): GitHub Action that runs DeepSeek Harness for PR review, CI diagnosis, trusted fixes, and issue-to-PR implementation.
+
+## UI & Interfaces
+
+- [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) (★ 1,300): Plugin and skin collection for the DSH Web UI: task board, git graph, right-side panel, and remote mobile UI.
+- [deeptide](https://github.com/paean-ai/deeptide) (★ 1,042): Built by DeepSeek, for DeepSeek — a Swift-native macOS coding agent.
+- [dsh-TUI](https://github.com/ccch1mneyyy/dsh-TUI) (★ 629): Claude Code-style fullscreen terminal UI: pixel-whale header, live status line, streaming thinking, double-Esc rollback, context progress bar + TPS gauge. `npm` one-line install.
+- [DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) (★ 531): A complete sidebar workbench: file rendering/editing, terminal, Git, subagents — with third-party tab registration.
+- [dsh-deep-whale](https://github.com/Small-tailqwq/dsh-deep-whale) (★ 374): Whale-girl skin series for DSH Web (deep-sea maid atelier).
+- [dsh-ads](https://github.com/Nagi-ovo/dsh-ads) (★ 259): Parody plugin: 2005-era Chinese-site-style sidebar ads, in-feed ads, and corner pop-ups (all fictional).
+- [oh-dsh](https://github.com/hust-open-atom-club/oh-dsh) (★ 137): One-stop community distribution: unified TUI, desktop, and Web UI experiences with layered installation.
+- [dsh-tianshu-tui](https://github.com/huiliyi37/dsh-tianshu-tui) (★ 103): Interactive terminal UI plugin with a self-developed harness workflow rendering core.
+- [whale-girl](https://github.com/vlln/whale-girl) (★ 99): Desktop-pet whale plugin (QQ-pet style): floating, draggable, feedable companion.
+- [dsh-visualize](https://github.com/Nagi-ovo/dsh-visualize) (★ 63): Generative UI plugin: the model draws interactive HTML cards directly into the conversation, with streaming preview.
+- [dsh-openpencil](https://github.com/ZSeven-W/dsh-openpencil) (★ 56): OpenPencil design preview and editing inside DSH.
+- [dsh-genui](https://github.com/omdsh-dev/dsh-genui) (★ 54): GenUI for DSH: interactive UI components rendered inline in assistant replies.
+- [dsh-launcher](https://github.com/Ruler4396/dsh-launcher) (★ 49): Lightweight Windows launcher: silent autostart at logon plus a minimal WebView2 window.
+- [dsh-open-in-vscode](https://github.com/omdsh-dev/dsh-open-in-vscode) (★ 37): Open DSH workspace directories in VS Code directly from the web GUI.
+- [dsh-turn-rewind](https://github.com/Anionex/dsh-turn-rewind) (★ 31): Rewind conversation and workspace state, powered by a persistent change ledger.
+- [dsh-notification](https://github.com/omdsh-dev/dsh-notification) (★ 30): Desktop notifications for turn completions, with per-outcome controls and keyword rules.
+- [dsh-annotation](https://github.com/omdsh-dev/dsh-annotation) (★ 26): Select text in the web UI to annotate it; annotations ship with your next message.
+- [ui-status-label](https://github.com/alingalingling/ui-status-label) (★ 26): Customize the whale's "deep diving" thinking status label to anything you like.
+- [Deepseek-Harness-Desktop](https://github.com/ChisaAlter/Deepseek-Harness-Desktop) (★ 24): Electron desktop shell for the DSH web UI with themes and background customization.
+- [dsh-ui-whale](https://github.com/lhh010/dsh-ui-whale) (★ 23): Hand-drawn pixel whale that lives in the session title bar, animates while thinking, and spouts water on completion.
+- [dsh-desktop](https://github.com/iuikj/dsh-desktop) (★ 18): A polished DeepSeek Harness desktop client.
+- [DeepSeekHarnessDesktop](https://github.com/wess09/DeepSeekHarnessDesktop) (★ 16): Desktop packaging of DeepSeek Harness.
+- [dsh-side-panel](https://github.com/ccq1/dsh-side-panel) (★ 15): Side panel integrating a file browser, terminal, and Git review.
+- [dsh-message-edit](https://github.com/Moeblack/dsh-message-edit) (★ 15): Branch-based message editing, reroll, retry, and a version timeline.
+- [dsh-share](https://github.com/hellodigua/dsh-share) (★ 14): One-click conversation sharing.
+- [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) (★ 14): Import history from Claude Code, Codex, and other agent tools, and continue the conversation in DSH.
+- [DSH-Desktop](https://github.com/JustGenius-s/DSH-Desktop) (★ 14): Another desktop build of DSH.
+- [dsh4vscode](https://github.com/DoggyHU/dsh4vscode): DSH chat windows inside VS Code with OpenCode-style independent sessions and model auto-routing.
+
+## Observability & Cost
+
+- [tokenbank](https://github.com/wink-run/tokenbank) (★ 71): Local LLM gateway between your agents and every provider: know where tokens go, spend less.
+- [forkprobe](https://github.com/Jayden-X-L/forkprobe) (★ 64): Compare multiple skills on the same task and pick the winner.
+
+## Integrations & Apps
+
+- [open-design](https://github.com/nexu-io/open-design) (★ 85,786): Open-source, local-first design app that turns your coding agent into a design engine: prototypes, landing pages, slides, images, and video.
+- [iPolloWork](https://github.com/Devin-AXIS/iPolloWork) (★ 3,807): AI workspace with a self-evolving agent runtime that integrates DeepSeek Harness for subagent delegation.
+- [OpenBiliClaw](https://github.com/whiteguo233/OpenBiliClaw) (★ 2,217): Local-first, self-evolving cross-platform AI content discovery agent ([DSH plugin](https://github.com/whiteguo233/dsh-openbiliclaw) with a dedicated fourth-column UI and 22 agent tools).
+- [coding-tools-mcp](https://github.com/xyTom/coding-tools-mcp) (★ 753): Give any AI agent the ability to code (MCP).
+- [sandbase-harness](https://github.com/sandbaseai/sandbase-harness) (★ 569): Open-source CMA-compatible agent runtime with MCP tools, sandboxed sessions, audit, and replay.
+- [MuseAI](https://github.com/yejiming/MuseAI) (★ 524): Create AI characters and enter story worlds — chat, adventure, and roleplay (ships as a DSH plugin).
+- [notes](https://github.com/zhaoolee/notes) (★ 137): Open-source Smartisan-style notes: self-hostable, skill- and DSH-plugin-enabled, with one-click image export.
+- [dsh-work](https://github.com/vibeinging/dsh-work) (★ 19): Local-first AI workbench combining agent sessions, project files, data analysis, web research, and MCP.
+
+## Plugin Development & Utilities
+
+- [dsh-find-plugins](https://github.com/Nagi-ovo/dsh-find-plugins) (★ 62): Discover and install plugins from within DSH itself.
+- [plugin-registry](https://github.com/vlln/plugin-registry) (★ 26): Plugin ecosystem infrastructure: a thin browser console for managing official repository plugins, plus a `make-dsh-plugin` skill for guided plugin development.
+
+## Learning Resources
+
+- [dsh-handbook](https://github.com/Electricitysheep/dsh-handbook) (★ 121): DeepSeek Harness from 0 to 1: installation, plugin development, performance tuning, and real multi-agent case studies (CN + EN PDF).
+- [hello-dsh](https://github.com/pingfanfan/hello-dsh) (★ 22): Zero-to-plugin tutorial for understanding the "everything is a plugin" architecture, with 22 skill examples.
+
+## Related Lists
+
+- [awesome-dsh-plugins](https://github.com/AdamPlatin123/awesome-dsh-plugins) (★ 608): Radar-style index that automatically scans for new dsh plugin candidates.
+- [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) (★ 452): Curated list of DSH plugins (CN/EN).
+- [awesome-deepseek-harness (0xsline)](https://github.com/0xsline/awesome-deepseek-harness) (★ 278): Curated plugins, tools, and infrastructure from dsh-external/hub and the public topic.
+- [awesome-dsh-plugin (bruc3van)](https://github.com/bruc3van/awesome-dsh-plugin) (★ 53): Find the right DSH plugin in 30 seconds — organized by problem, not just repo.
+- [awesome-DSH-plugin (Alex-Yanggg)](https://github.com/Alex-Yanggg/awesome-DSH-plugin) (★ 43): Plugins, extensions, tools, and development resources for DSH.
+- [awesome-deepseek-harness (Dominic789654)](https://github.com/Dominic789654/awesome-deepseek-harness) (★ 23): Plugins, skills, MCP servers, orchestrators, and UIs for DSH.
+- [awesome-deepseek-harness (libukai)](https://github.com/libukai/awesome-deepseek-harness) (★ 19): The ultimate guide: quickstart, resources, and selected plugins.

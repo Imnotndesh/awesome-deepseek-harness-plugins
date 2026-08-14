@@ -10,6 +10,39 @@ const total = PLUGINS.length;
 const totalStars = PLUGINS.reduce((s, p) => s + (p.stars ?? 0), 0);
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const cmdkData = PLUGINS.map((p) => ({ name: p.name, url: p.url, desc: p.desc, cat: p.cat, chip: p.chip, stars: p.stars }));
+const SITE = 'https://awesome-deepseek-harness-plugins.pages.dev';
+const DESCRIPTION = `${total} plugins, tools and integrations for DeepSeek Harness (dsh), discovered via the dsh-plugin GitHub topic. Search, filter by category, jump to the repo.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#website`,
+      url: SITE,
+      name: 'Awesome DeepSeek Harness Plugins',
+      description: DESCRIPTION,
+    },
+    {
+      '@type': 'CollectionPage',
+      '@id': `${SITE}/#catalog`,
+      url: SITE,
+      name: 'Every DeepSeek Harness plugin, one catalog.',
+      description: DESCRIPTION,
+      isPartOf: { '@id': `${SITE}/#website` },
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: total,
+        itemListElement: PLUGINS.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: p.name,
+          url: p.url,
+          description: p.desc,
+        })),
+      },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -18,7 +51,32 @@ const cmdkData = PLUGINS.map((p) => ({ name: p.name, url: p.url, desc: p.desc, c
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Awesome DeepSeek Harness Plugins — the dsh plugin catalog</title>
-    <meta name="description" content={`${total} plugins, tools and integrations for DeepSeek Harness (dsh), discovered via the dsh-plugin GitHub topic. Search, filter by category, jump to the repo.`} />
+    <meta name="description" content={DESCRIPTION} />
+    <link rel="canonical" href={SITE + '/'} />
+    <meta name="theme-color" content="#2f6bed" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="icon" type="image/svg+xml" href={import.meta.env.BASE_URL + 'favicon.svg'} />
+    <link rel="sitemap" href={import.meta.env.BASE_URL + 'sitemap-index.xml'} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Awesome DeepSeek Harness Plugins" />
+    <meta property="og:title" content="Every DeepSeek Harness plugin, one catalog." />
+    <meta property="og:description" content={DESCRIPTION} />
+    <meta property="og:url" content={SITE + '/'} />
+    <meta property="og:image" content={SITE + '/og.png'} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Awesome DeepSeek Harness Plugins — 83 plugins, 10 categories, one catalog." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Every DeepSeek Harness plugin, one catalog." />
+    <meta name="twitter:description" content={DESCRIPTION} />
+    <meta name="twitter:image" content={SITE + '/og.png'} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />

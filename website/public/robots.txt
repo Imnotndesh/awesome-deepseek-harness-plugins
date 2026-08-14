@@ -1,0 +1,35 @@
+# robots.txt for awesome-deepseek-harness-plugins.pages.dev
+# The catalog is public data — all crawlers welcome, including AI/LLM crawlers.
+
+User-agent: *
+Allow: /
+
+# Explicitly welcome LLM crawlers (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://awesome-deepseek-harness-plugins.pages.dev/sitemap-index.xml
