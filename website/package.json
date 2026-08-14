@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "deploy": "bun run build && wrangler pages deploy dist --project-name awesome-deepseek-harness-plugins --branch main"
   },
   "type": "module"
 }

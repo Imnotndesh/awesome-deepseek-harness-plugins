@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://sihanteng.github.io',
-  base: '/awesome-deepseek-harness-plugins',
+  site: 'https://awesome-deepseek-harness-plugins.pages.dev',
 });

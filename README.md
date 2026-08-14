@@ -6,7 +6,7 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 
 **Find more:** add the [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic to your repo for discoverability.
 
-**Website:** browse the searchable catalog at **[sihanteng.github.io/awesome-deepseek-harness-plugins](https://sihanteng.github.io/awesome-deepseek-harness-plugins/)** (source in [`website/`](website/), built with Astro + Bun, deployed via GitHub Pages).
+**Website:** browse the searchable catalog at **[awesome-deepseek-harness-plugins.pages.dev](https://awesome-deepseek-harness-plugins.pages.dev/)** (source in [`website/`](website/), built with Astro + Bun, hosted on Cloudflare Pages — redeploy with `cd website && bun run deploy`).
 
 ## Contents
 
