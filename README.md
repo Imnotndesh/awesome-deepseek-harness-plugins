@@ -46,6 +46,7 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 - [dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) - Vision toolkit for text-only models: intent-aware image Q&A, long-screenshot OCR, and UI restoration.
 - [dsh-vision](https://github.com/william-jin-cmu/dsh-vision) - `view_image` tool bridging any OpenAI-compatible VLM (works with free tiers).
 - [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) - Built-in keyless vision chain plus pixel-level tools (Q&A, grounding) for text-only agents.
+- [dsh-draw](https://github.com/PerryLink/dsh-draw) - Unified static-image generation routing for DeepSeek Harness: one image_generate tool across OpenAI Images, Zhipu CogView, and compatible endpoints, with health-aware fallback and durable results.
 
 ### Browser & Computer Use
 
@@ -53,6 +54,7 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 - [browser-bridge](https://github.com/hanelalo/browser-bridge) - Let your agent drive your real browser window, just like you would.
 - [dsh-computer-use](https://github.com/Anionex/dsh-computer-use) - Accessibility-first macOS computer-use plugin with scoped permissions and safe input.
 - [open-record-replay](https://github.com/humblebanana/open-record-replay) - macOS record-and-replay workflow recorder for computer-use agents: captures mouse, keyboard, and UI events.
+- [dsh-click](https://github.com/PerryLink/dsh-click) - Cross-platform native desktop control for DeepSeek Harness (Windows first): screen_shot, screen_read, click, type, scroll, and key actions with approval gating and process identity verification.
 
 ### Files & Editing
 
@@ -60,6 +62,7 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 - [dsh-toolkit](https://github.com/omdsh-dev/dsh-toolkit) - Zero-dependency toolkit: time, encoding, JSON, calculator, CSV, regex, Markdown, diff, stat, and schema tools.
 - [dsh-custom-tool](https://github.com/omdsh-dev/dsh-custom-tool) - Create and manage sandboxed JavaScript tools with a Monaco editor and model-driven tool lifecycle.
 - [dsh-plugin (PicGo)](https://github.com/PicGo/dsh-plugin) - Upload images and files to your image host from DeepSeek Harness, powered by PicGo.
+- [dsh-lsp-actions](https://github.com/PerryLink/dsh-lsp-actions) - LSP action surface for DSH: diagnostics, formatting, completion, code actions, symbols, signature help, inlay hints and rename, all backed by real language servers.
 
 ### Misc Tools
 
@@ -68,6 +71,22 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 - [rea](https://github.com/morluto/rea) - Reverse engineer anything with agents, from app behavior down to native binaries.
 - [flameox](https://github.com/morluto/flameox) - Runtime evidence for agents: trace, profile, and burn down hotspots in application, native, and GPU code.
 - [mcp-for-stata](https://github.com/SepineTam/mcp-for-stata) - MCP server integrating Stata into your agent workflow.
+- [dsh-auto-review](https://github.com/PerryLink/dsh-auto-review) - Read-only second-model reviewer for DSH approval requests: structured allow/deny verdicts with reasons, fail-closed by default.
+- [dsh-claude-move](https://github.com/PerryLink/dsh-claude-move) - Four-source migration wizard: move Claude Code, Codex, OpenCode and Hermes sessions, memories, skills, instructions and slash commands into DSH (/move wizard with approval gate and idempotent move.json, resumable sessions).
+- [dsh-data-quality](https://github.com/PerryLink/dsh-data-quality) - Data quality checking for DeepSeek Harness — profiling, cleaning, and verification pipelines with structured reports.
+- [dsh-defend](https://github.com/PerryLink/dsh-defend) - Detects prompt-injection, jailbreak, and secret-leak patterns on the agent/pre-step, tools/pre-execute, and tools/post-execute seams with allow/ask/block tiers, sanitized defend/detection audit events, a defend_report tool, and a destructive-delete command guard.
+- [dsh-doublecheck](https://github.com/PerryLink/dsh-doublecheck) - Engineering-discipline guard: requirements grill before the first edit, red/green test-evidence gates, forked adversary review, and a delivery report with a per-dimension verification workflow.
+- [dsh-fund-research](https://github.com/PerryLink/dsh-fund-research) - Deterministic research reports for Chinese public mutual funds built from public-source data (Tiantian Fund and Eastmoney), pure-function metrics (performance decomposition, holdings penetration, style attribution, manager profile), and versioned reports with a per-number snapshot traceability appendix.
+- [dsh-github](https://github.com/PerryLink/dsh-github) - Official-grade GitHub CI integration: a composite action.yml, a polling PR review bot with idempotent inline comments and a status-check gate, plus PR/issues tools with every write gated by human approval.
+- [dsh-industry-research](https://github.com/PerryLink/dsh-industry-research) - Deterministic industry research reports for DeepSeek Harness — company and industry research flows produce structured, verifiable reports from staged evidence.
+- [dsh-local-ai](https://github.com/PerryLink/dsh-local-ai) - Ollama provider for DeepSeek Harness with model management, health checks, rule-based local routing, and cloud fallback.
+- [dsh-mask](https://github.com/PerryLink/dsh-mask) - PII masking for DeepSeek Harness — anonymizes names, phones, emails, ids, and keys before requests and restores them at the display layer, keeping plaintext out of session logs.
+- [dsh-mcp-panel](https://github.com/PerryLink/dsh-mcp-panel) - MCP management console for the official DSH MCP client: server CRUD, health diagnostics, and trial calls from a settings tab.
+- [dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules) - Declarative Claude Code-style permission rules for DSH: ordered allow/deny/ask matching on tools, paths, and network targets.
+- [dsh-research-report](https://github.com/PerryLink/dsh-research-report) - Verifiable research-report engine for DeepSeek Harness with a content-addressed evidence ledger, versioned sealed reports where every claim carries a verification verdict and the manifest hash seals the directory, and retrieval orchestration that reuses the ctx.web and ctx.jobs seams.
+- [dsh-session-sync](https://github.com/PerryLink/dsh-session-sync) - Cross-device session sync for DeepSeek Harness: a dedicated git mirror of the session store with append-only keep-both conflict resolution that never loses a turn.
+- [dsh-skill-pack-security](https://github.com/PerryLink/dsh-skill-pack-security) - Security-audit methodology skill pack plus the plugin_vet supply-chain gate: eight agent skills (secret scan, dependency audit, supply-chain review, prompt-injection review, audit orchestration, threat modeling, vuln intel, incident response) in Chinese and English editions, with an npm provider bundle that mounts the skills and registers the automated plugin_vet pre-install scanner.
+- [dsh-translate](https://github.com/PerryLink/dsh-translate) - Tool-output repair layer for DeepSeek Harness — JSON schema enforcement, parameter mapping, and JSON repair for tool calls.
 
 ## Memory & Context
 
@@ -75,6 +94,8 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 - [dsh-memory-evolve](https://github.com/csyangwen/dsh-memory-evolve) - Cross-session long-term memory plus background self-evolution: five-track memory, git-branch awareness, and skill evolution — pure plugin, no core changes.
 - [billion-context-dsh](https://github.com/Tyan66666/billion-context-dsh) - Model-driven context compression (Active Context Pruning) — the model decides when and what to compress.
 - [dsh-context-doctor](https://github.com/Zhenyu98/dsh-context-doctor) - Audit exactly what every request carries: token cost of the AGENTS.md chain, skill catalog, and tool schemas, with duplicate/conflict detection.
+- [dsh-library](https://github.com/PerryLink/dsh-library) - Turns local markdown and text documents into a queryable knowledge base with hybrid semantic and keyword search, citation verification, and source injection.
+- [dsh-memento](https://github.com/PerryLink/dsh-memento) - Bounded, layered, approval-gated cross-session memory for DSH, with a SQLite provider and frozen snapshot injection.
 
 ## Orchestration & Agents
 
@@ -88,6 +109,8 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 - [helloagents](https://github.com/hellowind777/helloagents) - An autonomous agent companion that keeps working until the implementation is done and verified.
 - [oh-my-dsh](https://github.com/LaplaceYoung/oh-my-dsh) - A 700+ plugin ecosystem for DSH, registered purely through extension seams without touching the agent loop.
 - [deepseek-harness-action](https://github.com/Lixiaoyiao/deepseek-harness-action) - GitHub Action that runs DeepSeek Harness for PR review, CI diagnosis, trusted fixes, and issue-to-PR implementation.
+- [dsh-background-agents](https://github.com/PerryLink/dsh-background-agents) - Durable background child agents on the official subagent seam: start from any session, watch progress in the Web UI sidebar, message and interrupt any time, with per-child tool scoping, persona and delegation-depth caps.
+- [dsh-checkpoint-rewind](https://github.com/PerryLink/dsh-checkpoint-rewind) - Claude Code /rewind for DeepSeek Harness: git-first workspace snapshots before every mutating tool execution, turn-boundary session forks, and a one-shot /rewind command that restores files and forks the session back to a checkpoint.
 
 ## UI & Interfaces
 
@@ -112,6 +135,11 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 - [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) - Import history from Claude Code, Codex, and other agent tools, and continue the conversation in DSH.
 - [dsh-openpencil](https://github.com/ZSeven-W/dsh-openpencil) - OpenPencil design preview and editing inside DSH.
 - [dsh4vscode](https://github.com/DoggyHU/dsh4vscode) - DSH chat windows inside VS Code with OpenCode-style independent sessions and model auto-routing.
+- [dsh-composer-history](https://github.com/PerryLink/dsh-composer-history) - Terminal-style input history for the web composer: edge-first arrow-key recall with exact draft/caret restore, browser-local persisted history, Ctrl+R reverse search, and sliding-context awareness; 0.5.0 adds a smart input layer — cross-session snippets (/save, /load), prompt templates with variables, reuse insights, and compaction-summary highlighting.
+- [dsh-message-navigator](https://github.com/miaomiao636/dsh-message-navigator) - Codex-style message navigator for the DSH Web UI: a tick per user message along the conversation edge, hover/click to preview and smooth-jump, with full history auto-loading.
+- [dsh-output-styles](https://github.com/PerryLink/dsh-output-styles) - Runtime-switchable model output styles with Claude Code outputStyles parity, plus the output.render.* presentation protocol: a /style command, per-session persistence, systemPrompt injection, six built-in styles, a web picker, and a renderer registry with per-session/per-tool rules and /export.
+- [dsh-pr-checks](https://github.com/pauloapoloni/dsh-pr-checks) - GitHub Actions check status and progress for your open PRs, grouped by workspace/project, in the sidebar footer.
+- [dsh-session-pin](https://github.com/PerryLink/dsh-session-pin) - Pin sessions and workspaces to the top of the Web sidebar with per-pin row colors, a header toggle and a pinned panel; 0.4.0 adds a navigation organizer — pin groups (boards), tags and saved filter views, session health summaries, and /goto.
 
 ### Desktop Clients & Distros
 
@@ -135,6 +163,9 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 
 - [tokenbank](https://github.com/wink-run/tokenbank) - Local LLM gateway between your agents and every provider: know where tokens go, spend less.
 - [forkprobe](https://github.com/Jayden-X-L/forkprobe) - Compare multiple skills on the same task and pick the winner.
+- [dsh-budget](https://github.com/PerryLink/dsh-budget) - Cost governance for DeepSeek Harness: budgets, carbon, and latency in one panel, with per-model, per-session, and per-day token metering, threshold alerts, and over-limit policies.
+- [dsh-fast](https://github.com/PerryLink/dsh-fast) - Read-only performance diagnostics for DeepSeek Harness: reports session load and restore timing, context-injection volume, and LLM cache hit rate, off the model hot path.
+- [dsh-observe](https://github.com/PerryLink/dsh-observe) - Exports the session event stream to OpenTelemetry OTLP and Langfuse as sanitized, buffered traces and metrics, off by default.
 
 ## Integrations & Apps
 
@@ -151,6 +182,9 @@ DeepSeek Harness is built on an architecture where every capability — tools, U
 
 - [plugin-registry](https://github.com/vlln/plugin-registry) - Plugin ecosystem infrastructure: a thin browser console for managing official repository plugins, plus a `make-dsh-plugin` skill for guided plugin development.
 - [dsh-find-plugins](https://github.com/Nagi-ovo/dsh-find-plugins) - Discover and install plugins from within DSH itself.
+- [dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide) - The DSH plugin-development knowledge base as an on-demand agent skill: official constraints, task workflows, API reference and community gotchas, installed with the bundle so the agent can look things up while building a plugin.
+- [dsh-score](https://github.com/PerryLink/dsh-score) - Multi-dimensional quality scoring for DeepSeek Harness plugins that scores a repo or npm package across install success, maintenance activity, documentation completeness, security scan, and protocol compliance using real CLI evidence, and produces a JSON or Markdown leaderboard report.
+- [dsh-test-drive](https://github.com/PerryLink/dsh-test-drive) - Runs isolated install-and-smoke test drives for DSH plugins in throwaway profiles, returning structured pass/fail records and batch matrices without touching your real profile.
 
 ## Learning Resources
 
